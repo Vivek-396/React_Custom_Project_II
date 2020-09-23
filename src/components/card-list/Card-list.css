@@ -1,0 +1,6 @@
+.card-list{
+    margin: 0 1% 1% 1%;
+    display: grid;
+    width: 25%;
+    grid-gap: 1%;
+}

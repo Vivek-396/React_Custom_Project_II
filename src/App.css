@@ -1,0 +1,117 @@
+.App {
+  text-align: center;
+  display : flex;
+}
+
+hr{
+  padding:0;
+  margin-right: 2%;
+}
+p{
+  font-size: 1.3rem;
+}
+
+.Form{
+  width:75%;
+}
+
+.SignUp, .SignIn{
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+}
+
+form
+{
+  padding: 3%;
+}
+
+#signUp{
+  width: 90%;
+  text-align: left;
+}
+
+
+#signIn{
+  width: 90%;
+  text-align: left;
+}
+
+#profile{
+  width: 90%;
+  text-align: left;
+  text-align: center;
+}
+
+input{
+  margin-bottom: 2%;
+  font-size: 1.5rem;
+  width: 98%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+label{
+  width: 20%;
+  margin-bottom: 2%;
+  font-size: 1.5rem;
+}
+
+button
+{
+  width: 15%;
+  position: relative;
+  font-size: 1.5rem;
+  border-radius: 60px;
+  padding: 1%;
+  position: relative;
+  left: 80%;
+  margin-top: 20px;
+}
+
+.upperBtn{
+  position: absolute;
+  top: 1%;
+  left: 85%;
+  width: 11%;
+}
+  
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
