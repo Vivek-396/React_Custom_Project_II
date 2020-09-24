@@ -1,6 +1,24 @@
-.card-list{
-    margin: 0 1% 1% 1%;
-    display: grid;
+.list{
+    /* background-color: #ECECEE; */
+    min-height: 100vh;
     width: 25%;
+    text-align: center;
+}
+
+.card-list{
+    padding: 5% 3% 5% 3%;
+    display: grid;
+    width: 100%;
     grid-gap: 1%;
+    background-color: #ECECEE;
+    min-height: 100vh;
+    overflow: auto;
+}
+
+.user-list{
+    background-color: #202C37;
+    color: ivory;
+    padding: 14% 0 14% 0;
+    margin: 0;
+    border: 6px double ivory;
 }

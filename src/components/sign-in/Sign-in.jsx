@@ -3,7 +3,7 @@ import ObjCreate from "../../utils/createFormObject";
 
 class SignIn extends React.Component{
     constructor(props){
-        super(props);
+        super();
 
         this.state = {
           username: "",
@@ -30,7 +30,7 @@ class SignIn extends React.Component{
 
       if(this.props.refill!==null)
       {
-        alert(this.props.refill);
+        //alert(this.props.refill);
       }
      
       if(this.username===this.password){
@@ -49,7 +49,6 @@ class SignIn extends React.Component{
               //Handle Login
               let ele = this.props.users[index];
               var objUser = new ObjCreate(index+1,ele.name,ele.username,ele.email,ele.phone,ele.website,ele.tasks);
-              //console.log(objUser);
               this.props.activeUser(objUser);
           }
           else{
@@ -60,21 +59,24 @@ class SignIn extends React.Component{
       }
       else{
           alert("Failure");
+          this.props.changeForm("SIGN_IN");
       }
     }
 
     render(){
         return(
-          <div id="signUp">
+          <div className="sign">
       
-          <div>
+          <div className="header">
             <h1>Log In</h1>
             <p>Kindly fill details for log in.</p>
+
             <button type="button" className="upperBtn" onClick = {this.handleSignUp} >Sign Up</button>
-            <hr/>
+
           </div>
  
-          <form className="SignIn"  onSubmit = {this.signIn} >
+          
+          <form className="form"  onSubmit = {this.signIn} >
 
             <label for="username"><b>Username</b> </label>
             <input type='text' value={this.username} placeholder="Enter Username" onChange={this.handleChange} name="username" required/>
@@ -83,8 +85,9 @@ class SignIn extends React.Component{
             <input type='password' value={this.password} placeholder="Enter Password" onChange={this.handleChange} name="password" required/>
 
             <button type="submit">Log In</button>
-          
+  
           </form>
+          
         </div>
       )
     }

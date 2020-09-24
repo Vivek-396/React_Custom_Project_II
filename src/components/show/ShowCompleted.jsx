@@ -4,8 +4,7 @@ import { TaskCard } from '../task-card/Task-Card';
 
 export const ShowCompleted = ({allTasks}) => (
     <div> 
-        <h3>Completed Tasks</h3>
-        { 
+        <h3>Completed Tasks</h3><hr/> { 
          allTasks.tasks.filter(function(task) {
              if (task.checked) {
                return true; // skip

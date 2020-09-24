@@ -38,16 +38,17 @@ class SignUp extends React.Component{
 
     render(){
         return(
-          <div id="signUp">
+          <div className="sign">
       
-          <div>
-            <h1>Sign Up</h1>
+          <div className="header" >
+            <h1 >Sign Up</h1>
             <p>Please fill in this form to create an account.</p>
+
             <button type="button" className="upperBtn" onClick = {this.handleSignIn} >Log In</button>
-            <hr/>
+
           </div>
  
-          <form className="SignUp"  onSubmit = {this.signUp} >
+          <form className="form"  onSubmit = {this.signUp} >
 
             <label for="name"><b>Name</b>  </label>
             <input type='text' value={this.name} placeholder="Enter Name" onChange={this.handleChange} name="name" required/>
@@ -65,7 +66,7 @@ class SignUp extends React.Component{
             <input type='text' value={this.website} placeholder="Enter Website" onChange={this.handleChange} name="website" required/>
 
             <button type="submit">Sign Up</button>
-          
+
           </form>
         </div>
       )

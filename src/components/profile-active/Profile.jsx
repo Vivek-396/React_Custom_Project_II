@@ -1,24 +1,26 @@
 import React from 'react';
 import './Profile.css';
-
 import  Tasks  from '../tasks/Tasks';
 
 export const Profile = ({active,handleSignOut,appendInTask,removeInTask}) => (
 
- <div id='profile'>
-       <div>
+ <div className='sign'>
+       <div className="header">
           <h1>Welcome to Task</h1>
           <h2>Active User</h2>
-          <hr/> 
+
           <button type="button" className="upperBtn" onClick={()=>handleSignOut(active.id)} >Sign Out</button>
+        </div>
+        <div className="form">
           {active !== null ? 
-              (<div className="details">
-                  <h2>Username : {active.username}</h2> 
+              (<div>
+                <div className="details">
+                  <h2>{active.username}</h2> 
                   <p>Name : {active.name}</p>
                   <p>Phone No. : {active.phone}</p>
                   <p>Email : {active.email}</p>
-                  <hr/>
-
+                  </div>
+                  <br/>
                   <Tasks active={active} appendInTask={appendInTask} removeInTask={removeInTask}/>
 
                 </div>)

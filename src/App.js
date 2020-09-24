@@ -7,7 +7,6 @@ import SignIn from "./components/sign-in/Sign-in";
 import SignUp from "./components/sign-up/Sign-Up";
 import ObjCreate from "./utils/createFormObject";
 
-
 const FORM_TYPE = {
   SIGN_IN: "SIGN_IN",
   SIGN_UP: "SIGN_UP",
@@ -47,7 +46,6 @@ class App extends React.Component {
 
   componentDidMount() {
     this.fetchUsers();
-    //this.setState({visibleForm: this.FORM_TYPE.SIGN_UP});
   }
 
   fillUps = (id) => {
@@ -62,8 +60,6 @@ class App extends React.Component {
 
        this.handleChange(temp);
 
-       //this.setState({refill: users[id-1].username});
-       //alert(refill);
         this.changeForm("SIGN_IN");      
       }
     }
@@ -107,13 +103,13 @@ class App extends React.Component {
   }
 
   appendUser = (newUser) => {
-    this.setState({ users: newUser });
+    const { users } = this.state;
+    this.setState({ users: [...users,newUser] });
     this.setState({visibleForm: FORM_TYPE.SIGN_IN});
   };
 
   activeUser = (newUser) => {
     this.setState({ active: newUser });
-    this.setState({ refill: null });
     this.setState({visibleForm: FORM_TYPE.PROFILE });
   };
 
@@ -134,14 +130,14 @@ class App extends React.Component {
     switch(visibleForm) {
 
     case FORM_TYPE.SIGN_IN:
-          return <SignIn users={users} activeUser={this.activeUser} changeForm={this.changeForm}  refill={this.state.refill}/>;
+          return (<SignIn users={users} activeUser={this.activeUser} changeForm={this.changeForm}  refill={this.state.refill}/>);
 
     case FORM_TYPE.PROFILE: 
-        return <Profile active={this.state.active} handleSignOut={this.handleSignOut} appendInTask={this.appendInTask} removeInTask={this.removeInTask}/>;
+        return (<Profile active={this.state.active} handleSignOut={this.handleSignOut} appendInTask={this.appendInTask} removeInTask={this.removeInTask}/>);
 
     case FORM_TYPE.SIGN_UP:
     default :
-        return <SignUp users={users} appendUser={this.appendUser} changeForm={this.changeForm}/>;
+        return (<SignUp users={users} appendUser={this.appendUser} changeForm={this.changeForm}/>);
 
     }
   }

@@ -125,10 +125,7 @@ class Tasks extends React.Component {
         return(
           <div >
       
-          <div>
-            <h2>Tasks - List</h2>
-
-            <form className="addTasks"  onSubmit = {this.appendTasks} >
+            <form className="add-tasks"  onSubmit = {this.appendTasks} >
 
             <label for="taskname"><b>Add Task</b> </label>
             <input type='text' value={this.taskname} placeholder="Enter Task name" onChange={this.handleTaskName} name="taskname" className="taskbar" required/>
@@ -136,13 +133,15 @@ class Tasks extends React.Component {
             
             <button type="submit" className="addTaskBtn">Add Task</button>
             </form>
-
-            <hr/>
             
+            <br/>
+          <div className="header"> 
+            <h2>Tasks - List</h2>
             <button type="button" className="taskBtn" onClick={this.handleShowAll} >Show All Tasks</button>
             <button type="button" className="taskBtn" onClick={this.handleActive} >Active Tasks</button>
             <button type="button" className="taskBtn" onClick={this.handleCompleted} >Completed Tasks</button>
-           
+          </div>
+          <div className="lists">
             {this.renderTab()}
           </div>
  
