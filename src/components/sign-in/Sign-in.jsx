@@ -3,7 +3,7 @@ import ObjCreate from "../../utils/createFormObject";
 
 class SignIn extends React.Component{
     constructor(props){
-        super();
+        super(props);
 
         this.state = {
           username: "",
@@ -12,7 +12,6 @@ class SignIn extends React.Component{
     }
 
     componentDidMount(){}
-
 
     handleSignUp = () => {
         var val = "SIGN_UP";
@@ -38,7 +37,7 @@ class SignIn extends React.Component{
           var len = this.props.users.length;
 
           for(var i=0;i<len;i++){
-              console.log(this.props.users[i].username," : ",this.state.username);
+              //console.log(this.props.users[i].username," : ",this.state.username);
               if(this.props.users[i].username === this.state.username){
                   index=i;
               }
@@ -69,7 +68,7 @@ class SignIn extends React.Component{
           <div id="signUp">
       
           <div>
-            <h1>Sign In</h1>
+            <h1>Log In</h1>
             <p>Kindly fill details for log in.</p>
             <button type="button" className="upperBtn" onClick = {this.handleSignUp} >Sign Up</button>
             <hr/>
@@ -78,12 +77,12 @@ class SignIn extends React.Component{
           <form className="SignIn"  onSubmit = {this.signIn} >
 
             <label for="username"><b>Username</b> </label>
-            <input type='text' value={(this.props.refill !== null)?(this.username=this.props.refill):(this.username)} placeholder="Enter Username" onChange={this.handleChange} name="username" required/>
+            <input type='text' value={this.username} placeholder="Enter Username" onChange={this.handleChange} name="username" required/>
   
             <label for="phone"><b>Password</b> </label>
-            <input type='password' value={(this.props.refill !== null)?(this.password=this.props.refill):(this.password)} placeholder="Enter Password" onChange={this.handleChange} name="password" required/>
+            <input type='password' value={this.password} placeholder="Enter Password" onChange={this.handleChange} name="password" required/>
 
-            <button type="submit">Sign In</button>
+            <button type="submit">Log In</button>
           
           </form>
         </div>
