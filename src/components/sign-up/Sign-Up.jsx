@@ -15,9 +15,9 @@ class SignUp extends React.Component{
         };
     }
 
-    handleSignIn = () => {
-       alert("Yet to come");
-      //console.log(this.props.users[0]);
+    handleSignIn = (e) => {
+       var val = "SIGN_IN";
+       this.props.changeForm(val);
     }
 
     handleChange = event => {

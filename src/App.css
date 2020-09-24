@@ -80,7 +80,23 @@ button
   width: 11%;
 }
   
+.taskbar{
+  width: 30%;
+}
 
+.checkBtn{
+  width : 2%;
+}
+
+.addTaskBtn{
+  position: relative;
+  left: 2%;
+}
+
+.addTasks{
+  padding: 0 5% 0 15%;
+ }
+ 
 .App-logo {
   height: 40vmin;
   pointer-events: none;

@@ -10,8 +10,8 @@ import ObjCreate from "./utils/createFormObject";
 
 const FORM_TYPE = {
   SIGN_IN: "SIGN_IN",
-  SIGN_UP: "SING_UP",
-  PROFILE: "PROFILE" 
+  SIGN_UP: "SIGN_UP",
+  PROFILE: "PROFILE"
 };
 
 class App extends React.Component {
@@ -20,8 +20,9 @@ class App extends React.Component {
 
     this.state = {
       users: [],
-      active: [],
-      visibleForm: "initial_screen"
+      active: null,
+      visibleForm: "initial_screen",
+      prefill: null,
     };
   }
 
@@ -50,53 +51,97 @@ class App extends React.Component {
   }
 
   fillUps = (id) => {
-    //alert("Yet to come...");
-
-    if (this.state.active.length === 0) {
+    
+    if (this.state.active === null) {
       //Test condition of logged in first then proceed
-      var ele = document.getElementById("signIn");
-      ele.style.display = "block";
-      document.getElementById("signUp").style.display = "none";
-
-      //console.log(this.state.users[el-1].username);
 
       if (id != null) {
-        var index = id.target.getAttribute("id");
-        var form_ele = document.getElementsByClassName("SignIn");
-        form_ele[0].username.value = this.state.users[index - 1].username;
-        form_ele[0].psw.value = this.state.users[index - 1].username;
-        //console.log(id.target.getAttribute('id'));
+        
+       const { users } = this.state;
+       var temp = users[id-1].username;
+
+       this.handleChange(temp);
+
+       //this.setState({refill: users[id-1].username});
+       //alert(refill);
+        this.changeForm("SIGN_IN");      
       }
     }
   };
 
+  setStateSynchronous(stateUpdate) {
+    return new Promise(resolve => {
+    this.setState(stateUpdate, () => resolve());
+    });
+    }
+    
+    handleChange = async (temp) => {
+    await this.setStateSynchronous(
+    state => ({refill: temp})
+    );
+    };
+
+
+  appendInTask = (newTask) => {
+
+    const { users,active } =this.state;
+    
+    var activeId = this.state.active.id;
+
+    active.tasks.push(newTask);
+    this.setState({active});
+    console.log("App.js Active Tasks ",active.tasks);
+
+    users[activeId-1].tasks.push(newTask);
+    this.setState({users});
+    console.log("App.js Users ",users);
+  } 
+
+  removeInTask = (index,userId) => {
+    
+    const { users } = this.state;
+    console.log("Removed in UserTasks :",users[userId-1]);
+    this.state.users[userId-1].tasks.splice(index,1);
+    this.setState({users});
+
+  }
+
   appendUser = (newUser) => {
-    this.setState({ users: [...this.state.users, newUser] });
-    this.setState({visibelForm: FORM_TYPE.SIGN_IN});
+    this.setState({ users: newUser });
+    this.setState({visibleForm: FORM_TYPE.SIGN_IN});
   };
 
   activeUser = (newUser) => {
-    this.setState({ active: [...this.state.active, newUser] });
-    this.setState({visibelForm: FORM_TYPE.PROFILE });
+    this.setState({ active: newUser });
+    this.setState({ refill: null });
+    this.setState({visibleForm: FORM_TYPE.PROFILE });
   };
+
+  changeForm = (val) => {
+    //alert(val);
+    this.setState({visibleForm: val});
+  };
+
+  handleSignOut = () => {
+    this.setState({ active: null });
+    this.setState({ refill: null });
+    this.changeForm("SIGN_IN");
+  }
 
   renderForm = () => {
     const { users ,visibleForm } = this.state;
-    console.log(visibleForm);
     
     switch(visibleForm) {
 
-    case FORM_TYPE.SIGNIN:
-        return <SignIn users={users} activeUser={this.activeUser}/>;
+    case FORM_TYPE.SIGN_IN:
+          return <SignIn users={users} activeUser={this.activeUser} changeForm={this.changeForm}  refill={this.state.refill}/>;
 
-    case FORM_TYPE.SIGNUP:
-        return <SignUp users={users} appendUser={this.appendUser}/>;
+    case FORM_TYPE.PROFILE: 
+        return <Profile active={this.state.active} handleSignOut={this.handleSignOut} appendInTask={this.appendInTask} removeInTask={this.removeInTask}/>;
 
-    case FORM_TYPE.PROFILE:
-        return <Profile active={this.state.active} handleSignOut={this.handleSignOut}/>;
-    
+    case FORM_TYPE.SIGN_UP:
     default :
-        return <SignUp users={users} appendUser={this.appendUser}/>;
+        return <SignUp users={users} appendUser={this.appendUser} changeForm={this.changeForm}/>;
 
     }
   }

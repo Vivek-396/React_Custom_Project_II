@@ -1,10 +1,11 @@
-#profile{
-    display: none;
-    width: 90%;
-    text-align: left;
-    text-align: center;
-  }
-
 .details{
-  text-align: left;
+text-align: left;
+}
+
+.taskBtn{
+  position: relative;
+  left: 15%;
+  margin: 2%;
+  font-size: 1rem;
+  font-weight: 100;
 }

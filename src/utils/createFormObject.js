@@ -1,4 +1,4 @@
-function ObjCreate(id,name,username,email,phone,website){
+function ObjCreate(id,name,username,email,phone,website,task=[]){
 
     this.id=id;
     this.name=name;
@@ -6,6 +6,6 @@ function ObjCreate(id,name,username,email,phone,website){
     this.email=email;
     this.phone=phone;
     this.website=website;
-    this.tasks=[];
+    this.tasks=[...task];
   }
   export default ObjCreate;
