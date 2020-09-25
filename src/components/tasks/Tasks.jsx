@@ -3,12 +3,13 @@ import taskObjCreate from "../../utils/createTaskObject";
 import {ShowAll} from '../show/ShowAll';
 import {ShowCompleted} from '../show/ShowCompleted';
 import {ShowActive} from '../show/ShowActive';
+import { BrowserRouter as Router,Link, Route, Switch } from 'react-router-dom';
 
-const TAB_TYPE = {
-    SHOW_ALL: "SHOW_ALL",
-    SHOW_ACTIVE: "SHOW_ACTIVE",
-    SHOW_COMPLETED: "SHOW_COMPLETED" 
-  };
+// const TAB_TYPE = {
+//     SHOW_ALL: "SHOW_ALL",
+//     SHOW_ACTIVE: "SHOW_ACTIVE",
+//     SHOW_COMPLETED: "SHOW_COMPLETED" 
+//   };
 
 var count=0;
 
@@ -16,7 +17,7 @@ class Tasks extends React.Component {
 
     constructor (props) {
 
-        super(props);
+        super();
 
         this.state = {
              taskname : "",
@@ -65,40 +66,40 @@ class Tasks extends React.Component {
         this.props.removeInTask(index,userId);
     }
 
-    changeTab = (val) => {
-        this.setState({visibleTab: val});
-      };
+    // changeTab = (val) => {
+    //     this.setState({visibleTab: val});
+    //   };
     
-    renderTab = () => {
+    // renderTab = () => {
         
-        const { visibleTab } =this.state;
+    //     const { visibleTab } =this.state;
 
-        switch(visibleTab) {
+    //     switch(visibleTab) {
     
-        case TAB_TYPE.SHOW_ACTIVE:
-              return <ShowActive allTasks={this.props.active}/>;
+    //     case TAB_TYPE.SHOW_ACTIVE:
+    //           return <ShowActive allTasks={this.props.active}/>;
     
-        case TAB_TYPE.SHOW_COMPLETED: 
-            return <ShowCompleted allTasks={this.props.active} />;
+    //     case TAB_TYPE.SHOW_COMPLETED: 
+    //         return <ShowCompleted allTasks={this.props.active} />;
     
-        case TAB_TYPE.SHOW_ALL:
-            default :
-            return <ShowAll allTasks={this.props.active} checkChange={this.checkChange} removeTask={this.removeTask}/>;
-        }
-    }  
+    //     case TAB_TYPE.SHOW_ALL:
+    //         default :
+    //         return <ShowAll allTasks={this.props.active} checkChange={this.checkChange} removeTask={this.removeTask}/>;
+    //     }
+    // }  
 
-    handleShowAll = () => {
-        this.changeTab(TAB_TYPE.SHOW_ALL);
-    }
+    // handleShowAll = () => {
+    //     this.changeTab(TAB_TYPE.SHOW_ALL);
+    // }
 
-    handleActive = () => {
-        this.changeTab(TAB_TYPE.SHOW_ACTIVE);
-    }
+    // handleActive = () => {
+    //     this.changeTab(TAB_TYPE.SHOW_ACTIVE);
+    // }
 
-    handleCompleted = () => {
+    // handleCompleted = () => {
           
-          this.changeTab(TAB_TYPE.SHOW_COMPLETED);
-    }
+    //       this.changeTab(TAB_TYPE.SHOW_COMPLETED);
+    // }
 
     handleTaskName = event => {
         //console.log(event.target.value);
@@ -124,7 +125,7 @@ class Tasks extends React.Component {
     render(){
         return(
           <div >
-      
+            <Router>
             <form className="add-tasks"  onSubmit = {this.appendTasks} >
 
             <label for="taskname"><b>Add Task</b> </label>
@@ -135,17 +136,36 @@ class Tasks extends React.Component {
             </form>
             
             <br/>
+
           <div className="header"> 
             <h2>Tasks - List</h2>
-            <button type="button" className="taskBtn" onClick={this.handleShowAll} >Show All Tasks</button>
-            <button type="button" className="taskBtn" onClick={this.handleActive} >Active Tasks</button>
-            <button type="button" className="taskBtn" onClick={this.handleCompleted} >Completed Tasks</button>
+            <Link to="/profile">
+            <button type="button" className="taskBtn" >Show All Tasks</button>
+            </Link>
+            <Link to="/profile/active">
+            <button type="button" className="taskBtn"  >Active Tasks</button>
+            </Link>
+            <Link to="/profile/completed">
+            <button type="button" className="taskBtn"  >Completed Tasks</button>
+            </Link>
           </div>
+
           <div className="lists">
-            {this.renderTab()}
+              <Switch>
+                  <Route path="/profile" exact>
+                     <ShowAll allTasks={this.props.active} checkChange={this.checkChange} removeTask={this.removeTask}/>   
+                  </Route>
+                  <Route path="/profile/active">
+                    <ShowActive allTasks={this.props.active}/>
+                  </Route>
+                  <Route path="/profile/completed">
+                    <ShowCompleted allTasks={this.props.active} />
+                  </Route>
+              </Switch>
+            {/* {this.renderTab()} */}
           </div>
  
-         
+          </Router>
         </div>
       )
     }

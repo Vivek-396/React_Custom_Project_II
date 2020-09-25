@@ -7,6 +7,8 @@ import SignIn from "./components/sign-in/Sign-in";
 import SignUp from "./components/sign-up/Sign-Up";
 import ObjCreate from "./utils/createFormObject";
 
+//import {BrowserRouter as Router, Links, Switch, Route} from 'react-router-dom';
+
 const FORM_TYPE = {
   SIGN_IN: "SIGN_IN",
   SIGN_UP: "SIGN_UP",
