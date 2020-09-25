@@ -9,10 +9,8 @@
     padding: 5% 3% 5% 3%;
     display: grid;
     width: 100%;
-    grid-gap: 1%;
+    grid-gap: 18px;
     background-color: #ECECEE;
-    min-height: 100vh;
-    overflow: auto;
 }
 
 .user-list{
