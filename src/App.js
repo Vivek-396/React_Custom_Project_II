@@ -99,7 +99,7 @@ class App extends React.Component {
     
     const { users } = this.state;
     console.log("Removed in UserTasks :",users[userId-1]);
-    this.state.users[userId-1].tasks.splice(index,1);
+    users[userId-1].tasks.splice(index,1);
     this.setState({users});
 
   }
@@ -116,7 +116,6 @@ class App extends React.Component {
   };
 
   changeForm = (val) => {
-    //alert(val);
     this.setState({visibleForm: val});
   };
 
@@ -127,15 +126,15 @@ class App extends React.Component {
   }
 
   renderForm = () => {
-    const { users ,visibleForm } = this.state;
+    const { users ,visibleForm, active, refill } = this.state;
     
     switch(visibleForm) {
 
     case FORM_TYPE.SIGN_IN:
-          return (<SignIn users={users} activeUser={this.activeUser} changeForm={this.changeForm}  refill={this.state.refill}/>);
+          return (<SignIn users={users} activeUser={this.activeUser} changeForm={this.changeForm}  refill={refill}/>);
 
     case FORM_TYPE.PROFILE: 
-        return (<Profile active={this.state.active} handleSignOut={this.handleSignOut} appendInTask={this.appendInTask} removeInTask={this.removeInTask}/>);
+        return (<Profile active={active} handleSignOut={this.handleSignOut} appendInTask={this.appendInTask} removeInTask={this.removeInTask}/>);
 
     case FORM_TYPE.SIGN_UP:
     default :

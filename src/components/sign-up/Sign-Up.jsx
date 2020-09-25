@@ -27,12 +27,14 @@ class SignUp extends React.Component{
     }
 
     signUp = (event) => {
+      const{ name, username, email, phone, website } =this.state;
+       
       alert("Signed Up successfully");
       event.preventDefault();
       const id_e=(this.props.users.length+1);
       this.setState({ id : id_e });
 
-      var objUser = new ObjCreate(id_e,this.state.name,this.state.username,this.state.email,this.state.phone,this.state.website);
+      var objUser = new ObjCreate(id_e,name,username,email,phone,website);
       
       this.props.appendUser(objUser);
     }
@@ -54,19 +56,19 @@ class SignUp extends React.Component{
           <form className="form"  onSubmit = {this.signUp} >
 
             <label for="name"><b>Name</b>  </label>
-            <input type='text' value={this.name} placeholder="Enter Name" onChange={this.handleChange} name="name" required/>
+            <input type='text' value={this.state.name} placeholder="Enter Name" onChange={this.handleChange} name="name" required/>
 
             <label for="username"><b>Username</b> </label>
-            <input type='text' value={this.username} placeholder="Enter Username" onChange={this.handleChange} name="username" required/>
+            <input type='text' value={this.state.username} placeholder="Enter Username" onChange={this.handleChange} name="username" required/>
   
             <label for="phone"><b>Phone No.</b> </label>
-            <input type='number' value={this.phone} placeholder="Enter Phone No." onChange={this.handleChange} name="phone" required/>
+            <input type='number' value={this.state.phone} placeholder="Enter Phone No." onChange={this.handleChange} name="phone" required/>
 
             <label for="email"><b>Email</b> </label>
-            <input type='email' value={this.email} placeholder="Enter Email" onChange={this.handleChange} name="email" required/>
+            <input type='email' value={this.state.email} placeholder="Enter Email" onChange={this.handleChange} name="email" required/>
 
             <label for="website"><b>Website</b> </label>
-            <input type='text' value={this.website} placeholder="Enter Website" onChange={this.handleChange} name="website" required/>
+            <input type='text' value={this.state.website} placeholder="Enter Website" onChange={this.handleChange} name="website" required/>
 
             <button type="submit">Sign Up</button>
 

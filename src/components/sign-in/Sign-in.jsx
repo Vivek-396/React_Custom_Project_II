@@ -21,7 +21,7 @@ class SignIn extends React.Component{
     }
 
     handleSignUp = () => {
-        var val = "SIGN_UP";
+      var val = "SIGN_UP";
       this.props.changeForm(val);
     }
 

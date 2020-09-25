@@ -107,19 +107,23 @@ class Tasks extends React.Component {
     }
 
     handleCheckbox = event => {
+      const { checked } = this.state;
+
         if(event.target != null){
-            (this.state.checked === true) ? this.setState({ checked: false }) : this.setState({ checked: true }) 
+            (checked === true) ? this.setState({ checked: false }) : this.setState({ checked: true }) 
         }
     }
 
     appendTasks = (event) => {
 
         event.preventDefault();
-        
-        var taskObj = new taskObjCreate(count,this.state.taskname,this.state.checked);
+
+        const { taskname, checked } = this.state;
+        var taskObj = new taskObjCreate(count,taskname,checked);
         console.log(taskObj);
         count++;
         this.props.appendInTask(taskObj);
+        event.target.taskname.value="";
     }
 
     render(){
@@ -129,8 +133,8 @@ class Tasks extends React.Component {
             <form className="add-tasks"  onSubmit = {this.appendTasks} >
 
             <label for="taskname"><b>Add Task</b> </label>
-            <input type='text' value={this.taskname} placeholder="Enter Task name" onChange={this.handleTaskName} name="taskname" className="taskbar" required/>
-            <input type='checkbox' value={this.password}  onChange={this.handleCheckbox} name="checked" className="checkBtn"/>
+            <input type='text' value={this.state.taskname} placeholder="Enter Task name" onChange={this.handleTaskName} name="taskname" className="taskbar" required/>
+            <input type='checkbox' value={this.state.password}  onChange={this.handleCheckbox} name="checked" className="checkBtn"/>
             
             <button type="submit" className="addTaskBtn">Add Task</button>
             </form>
@@ -140,7 +144,7 @@ class Tasks extends React.Component {
           <div className="header"> 
             <h2>Tasks - List</h2>
             <hr/>
-            <Link to="/profile">
+            <Link to="/">
             <button type="button" className="taskBtn" >Show All Tasks</button>
             </Link>
             <Link to="/profile/active">
@@ -153,7 +157,7 @@ class Tasks extends React.Component {
 
           <div className="lists">
               <Switch>
-                  <Route path="/profile" exact>
+                  <Route path="/" exact>
                      <ShowAll allTasks={this.props.active} checkChange={this.checkChange} removeTask={this.removeTask}/>   
                   </Route>
                   <Route path="/profile/active">
