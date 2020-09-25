@@ -15,7 +15,7 @@ export const Profile = ({active,handleSignOut,appendInTask,removeInTask}) => (
           {active !== null ? 
               (<div>
                 <div className="details">
-                  <h2>{active.username}</h2> 
+                  <h2>{active.username}</h2><hr/> 
                   <p>Name : {active.name}</p>
                   <p>Phone No. : {active.phone}</p>
                   <p>Email : {active.email}</p>

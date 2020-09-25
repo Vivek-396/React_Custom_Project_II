@@ -2,17 +2,21 @@
 text-align: left;
 margin: 0;
 padding: 6px;
-font-size: 1rem;
+font-size: 1.4rem;
+font-weight: 900;
+letter-spacing: 3px;
+word-spacing: 5px;
+color: ivory;
 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-background: rgb(131,58,180);
-background: linear-gradient(210deg, rgba(131,58,180,0.7133228291316527) 0%, rgba(218,176,191,0.727328431372549) 50%, rgba(255,255,255,1) 100%);
+border: 6px solid  #202C37;
+background: #426483;
 }
 
 .add-tasks{
   display : block;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   background-color: lightcyan;
-  border: 6px solid orange;
+  border: 6px solid #202C37;
   text-align: center;
 }
 

@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
 }
 
 .App {
@@ -16,16 +17,12 @@ p{
   font-size: 1.3rem;
 }
 
-#profile{
-  width: 90%;
-  text-align: left;
-  text-align: center;
-}
-
 input{
-  margin-bottom: 2%;
+  margin: 1% 0 1% 0;
   font-size: 1.5rem;
   width: 98%;
+  border-radius: 30px;
+  padding: 8px;
 }
 
 input::-webkit-outer-spin-button,
@@ -44,10 +41,18 @@ button
 {
   width: 22%;
   position: relative;
-  font-size: 1.5rem;
+  font-size: 24px;
+  font-weight: 900;
   border-radius: 60px;
   padding: 1%;
   margin: 1%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+button:active {
+  background-color: gainsboro;
+  box-shadow: 0 5px #666;
+  transform: translateY(3px);
 }
 
 .upperBtn{

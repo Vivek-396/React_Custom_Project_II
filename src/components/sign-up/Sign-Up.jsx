@@ -1,5 +1,6 @@
 import React from 'react';
 import ObjCreate from "../../utils/createFormObject";
+//import {Link} from 'react-router-dom';
 
 class SignUp extends React.Component{
     constructor(props){
@@ -39,12 +40,14 @@ class SignUp extends React.Component{
     render(){
         return(
           <div className="sign">
-      
+          
           <div className="header" >
             <h1 >Sign Up</h1>
             <p>Please fill in this form to create an account.</p>
 
+            {/* <Link to="/login"> */}
             <button type="button" className="upperBtn" onClick = {this.handleSignIn} >Log In</button>
+            {/* </Link> */}
 
           </div>
  

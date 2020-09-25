@@ -139,6 +139,7 @@ class Tasks extends React.Component {
 
           <div className="header"> 
             <h2>Tasks - List</h2>
+            <hr/>
             <Link to="/profile">
             <button type="button" className="taskBtn" >Show All Tasks</button>
             </Link>

@@ -7,7 +7,7 @@ import SignIn from "./components/sign-in/Sign-in";
 import SignUp from "./components/sign-up/Sign-Up";
 import ObjCreate from "./utils/createFormObject";
 
-//import {BrowserRouter as Router, Links, Switch, Route} from 'react-router-dom';
+//import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 const FORM_TYPE = {
   SIGN_IN: "SIGN_IN",
@@ -23,7 +23,7 @@ class App extends React.Component {
       users: [],
       active: null,
       visibleForm: "initial_screen",
-      prefill: null,
+      refill: null,
     };
   }
 
@@ -73,7 +73,7 @@ class App extends React.Component {
     });
     }
     
-    handleChange = async (temp) => {
+  handleChange = async (temp) => {
     await this.setStateSynchronous(
     state => ({refill: temp})
     );
@@ -149,8 +149,24 @@ class App extends React.Component {
 
     return (
       <div className="App">
+
+       
         <CardList users={users} fillUps={this.fillUps} />
+
         {this.renderForm()}
+        {/* <Router>
+        <Switch>
+          <Route path="/" exact>
+            <SignUp users={users} appendUser={this.appendUser} changeForm={this.changeForm}/>   
+          </Route>
+          <Route path="/login">
+            <SignIn users={users} activeUser={this.activeUser} changeForm={this.changeForm}  refill={this.state.refill}/>
+          </Route>
+          <Route path="/profile">
+            <Profile active={this.state.active} handleSignOut={this.handleSignOut} appendInTask={this.appendInTask} removeInTask={this.removeInTask}/>
+          </Route>
+        </Switch>
+        </Router> */}
       </div>
     );
   }
