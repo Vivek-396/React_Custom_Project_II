@@ -7,7 +7,7 @@ import SignIn from "./components/sign-in/Sign-in";
 import SignUp from "./components/sign-up/Sign-Up";
 import ObjCreate from "./utils/createFormObject";
 
-//import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, withRouter} from 'react-router-dom';
 
 const FORM_TYPE = {
   SIGN_IN: "SIGN_IN",
@@ -62,7 +62,8 @@ class App extends React.Component {
 
        this.handleChange(temp);
 
-        this.changeForm("SIGN_IN");      
+        //this.changeForm("SIGN_IN");    
+        this.props.history.push("/login"); 
       }
     }
   };
@@ -88,17 +89,14 @@ class App extends React.Component {
 
     active.tasks.push(newTask);
     this.setState({active});
-    console.log("App.js Active Tasks ",active.tasks);
 
     users[activeId-1].tasks.push(newTask);
     this.setState({users});
-    console.log("App.js Users ",users);
   } 
 
   removeInTask = (index,userId) => {
     
     const { users } = this.state;
-    console.log("Removed in UserTasks :",users[userId-1]);
     users[userId-1].tasks.splice(index,1);
     this.setState({users});
 
@@ -122,7 +120,7 @@ class App extends React.Component {
   handleSignOut = () => {
     this.setState({ active: null });
     this.setState({ refill: null });
-    this.changeForm("SIGN_IN");
+    //this.changeForm("SIGN_IN");
   }
 
   renderForm = () => {
@@ -149,11 +147,11 @@ class App extends React.Component {
     return (
       <div className="App">
 
-       
+      <Router>
         <CardList users={users} fillUps={this.fillUps} />
 
-        {this.renderForm()}
-        {/* <Router>
+        {/* {this.renderForm()} */}
+        
         <Switch>
           <Route path="/" exact>
             <SignUp users={users} appendUser={this.appendUser} changeForm={this.changeForm}/>   
@@ -165,10 +163,11 @@ class App extends React.Component {
             <Profile active={this.state.active} handleSignOut={this.handleSignOut} appendInTask={this.appendInTask} removeInTask={this.removeInTask}/>
           </Route>
         </Switch>
-        </Router> */}
+        
+        </Router>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

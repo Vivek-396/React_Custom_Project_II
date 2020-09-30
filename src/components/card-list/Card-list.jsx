@@ -3,8 +3,6 @@ import './Card-list.css';
 
 import { Card } from '../card/Card';
 
-console.log("Card-List");
-
 export const CardList = ({users, fillUps}) => (
  <div className='list'>
  <h1 className="user-list">User List</h1>

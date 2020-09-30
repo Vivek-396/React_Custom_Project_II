@@ -3,7 +3,7 @@ import taskObjCreate from "../../utils/createTaskObject";
 import {ShowAll} from '../show/ShowAll';
 import {ShowCompleted} from '../show/ShowCompleted';
 import {ShowActive} from '../show/ShowActive';
-import { BrowserRouter as Router,Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router,Link, Route, Switch, withRouter } from 'react-router-dom';
 
 // const TAB_TYPE = {
 //     SHOW_ALL: "SHOW_ALL",
@@ -120,10 +120,14 @@ class Tasks extends React.Component {
 
         const { taskname, checked } = this.state;
         var taskObj = new taskObjCreate(count,taskname,checked);
-        console.log(taskObj);
         count++;
         this.props.appendInTask(taskObj);
-        event.target.taskname.value="";
+
+        this.setState((state)=>({taskname:""}));
+        event.target.elements[1].checked=false;
+
+        console.log(this.props);
+        
     }
 
     render(){
@@ -132,8 +136,9 @@ class Tasks extends React.Component {
             <Router>
             <form className="add-tasks"  onSubmit = {this.appendTasks} >
 
-            <label for="taskname"><b>Add Task</b> </label>
+            <label htmlFor="taskname"><b>Add Task</b> 
             <input type='text' value={this.state.taskname} placeholder="Enter Task name" onChange={this.handleTaskName} name="taskname" className="taskbar" required/>
+            </label>
             <input type='checkbox' value={this.state.password}  onChange={this.handleCheckbox} name="checked" className="checkBtn"/>
             
             <button type="submit" className="addTaskBtn">Add Task</button>
@@ -144,26 +149,26 @@ class Tasks extends React.Component {
           <div className="header"> 
             <h2>Tasks - List</h2>
             <hr/>
-            <Link to="/">
+            <Link to={this.props.match.url + `/${this.props.active.id}`}>
             <button type="button" className="taskBtn" >Show All Tasks</button>
             </Link>
-            <Link to="/profile/active">
+            <Link to={this.props.match.url + `/${this.props.active.id}/active`}>
             <button type="button" className="taskBtn"  >Active Tasks</button>
             </Link>
-            <Link to="/profile/completed">
+            <Link to={this.props.match.url + `/${this.props.active.id}/completed`}>
             <button type="button" className="taskBtn"  >Completed Tasks</button>
             </Link>
           </div>
 
           <div className="lists">
               <Switch>
-                  <Route path="/" exact>
+                  <Route path={this.props.match.url + `/${this.props.active.id}`} exact>
                      <ShowAll allTasks={this.props.active} checkChange={this.checkChange} removeTask={this.removeTask}/>   
                   </Route>
-                  <Route path="/profile/active">
+                  <Route path={this.props.match.url + `/${this.props.active.id}/active`}>
                     <ShowActive allTasks={this.props.active}/>
                   </Route>
-                  <Route path="/profile/completed">
+                  <Route path={this.props.match.url + `/${this.props.active.id}/completed`}>
                     <ShowCompleted allTasks={this.props.active} />
                   </Route>
               </Switch>
@@ -176,4 +181,4 @@ class Tasks extends React.Component {
     }
 }
 
-export default Tasks;
+export default withRouter(Tasks);

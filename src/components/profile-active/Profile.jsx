@@ -1,15 +1,18 @@
 import React from 'react';
 import './Profile.css';
 import  Tasks  from '../tasks/Tasks';
+import { Link } from 'react-router-dom';
 
-export const Profile = ({active,handleSignOut,appendInTask,removeInTask}) => (
+//()=>handleSignOut(active.id) onClick of handleSignOut
+
+export const Profile = ({active,appendInTask,removeInTask}) => (
 
  <div className='sign'>
        <div className="header">
-          <h1>Welcome to Task</h1>
+          <h1>Profile Page</h1>
           <h2>Active User</h2>
 
-          <button type="button" className="upperBtn" onClick={()=>handleSignOut(active.id)} >Sign Out</button>
+          <Link to="/login"><button type="button" className="upperBtn" >Sign Out</button></Link>
         </div>
         <div className="form">
           {active !== null ? 

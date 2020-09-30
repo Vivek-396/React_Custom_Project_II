@@ -1,6 +1,6 @@
 import React from 'react';
 import ObjCreate from "../../utils/createFormObject";
-//import {Link} from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 class SignIn extends React.Component{
     constructor(props){
@@ -20,10 +20,11 @@ class SignIn extends React.Component{
       return null;
     }
 
-    handleSignUp = () => {
-      var val = "SIGN_UP";
-      this.props.changeForm(val);
-    }
+    // handleSignUp = () => {
+    //   var val = "SIGN_UP";
+    //   this.props.changeForm(val);
+
+    // }
 
     handleChange = event => {
       const { value, name } = event.target;
@@ -36,15 +37,14 @@ class SignIn extends React.Component{
       const { username, password} = this.state;
       event.preventDefault();
       var index=-1;
-
-      //console.log(event.target.username.value," : ",event.target.password.value);
+    
       if(username===password){
           var len = this.props.users.length;
-          
+
           for(var i=0;i<len;i++){
               if(this.props.users[i].username === username){
-                  index=i;  }
-          }
+                  index=i; break; 
+          }}
 
           if(index!==-1){
               alert("Success");
@@ -53,16 +53,21 @@ class SignIn extends React.Component{
               let ele = this.props.users[index];
               var objUser = new ObjCreate(index+1,ele.name,ele.username,ele.email,ele.phone,ele.website,ele.tasks);
               this.props.activeUser(objUser);
+
+              this.props.history.push(`/profile/${objUser.id}`);
+
           }
           else{
             alert("User not present");
             //Revert Back to sign up
-            this.props.changeForm("SIGN_UP");
+           // this.props.changeForm("SIGN_UP");
+            //
           }
       }
       else{
           alert("Invalid Credentials");
-          this.props.changeForm("SIGN_IN");
+          //this.props.changeForm("SIGN_IN");
+          //
       }
     }
 
@@ -74,17 +79,19 @@ class SignIn extends React.Component{
             <h1>Log In</h1>
             <p>Kindly fill details for log in.</p>
 
-            {/* <Link to='/'> */}
+            <Link to='/'>
             <button type="button" className="upperBtn" onClick = {this.handleSignUp} >Sign Up</button>
-            {/* </Link> */}
+            </Link>
           </div>
  
           <form className="form"  onSubmit = {this.signIn} >
-            <label for="username"><b>Username</b> </label>
+            <label htmlFor="username"><b>Username</b> 
             <input type='text' value={(this.state.username)} placeholder="Enter Username" onChange={this.handleChange} name="username" required/>
+            </label>
   
-            <label for="phone"><b>Password</b> </label>
+            <label htmlFor="phone"><b>Password</b> 
             <input type='password' value={(this.state.password)} placeholder="Enter Password" onChange={this.handleChange} name="password" required/>
+            </label>
 
             <button type="submit">Log In</button>
           </form>
@@ -94,4 +101,4 @@ class SignIn extends React.Component{
     }
 }
 
-export default SignIn;
+export default withRouter(SignIn);

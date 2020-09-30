@@ -1,7 +1,6 @@
 import React from 'react';
+//import {Link, Redirect} from 'react-router-dom';
 import './Card.css';
-
-console.log("Card");
 
 export const Card = ({user, fillUps}) => (
      <div className="card-container" onClick={()=>fillUps(user.id)} id={user.id}>
@@ -11,4 +10,4 @@ export const Card = ({user, fillUps}) => (
          <h3>{user.phone}</h3>
          <h3>{user.website}</h3>
     </div>
-);
+); 

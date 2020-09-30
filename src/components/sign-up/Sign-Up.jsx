@@ -1,6 +1,6 @@
 import React from 'react';
 import ObjCreate from "../../utils/createFormObject";
-//import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 class SignUp extends React.Component{
     constructor(props){
@@ -16,10 +16,10 @@ class SignUp extends React.Component{
         };
     }
 
-    handleSignIn = (e) => {
-       var val = "SIGN_IN";
-       this.props.changeForm(val);
-    }
+    // handleSignIn = (e) => {
+    //    var val = "SIGN_IN";
+    //    this.props.changeForm(val);
+    // }
 
     handleChange = event => {
       const { value, name } = event.target;
@@ -37,6 +37,8 @@ class SignUp extends React.Component{
       var objUser = new ObjCreate(id_e,name,username,email,phone,website);
       
       this.props.appendUser(objUser);
+
+      this.props.history.push('/login');
     }
 
     render(){
@@ -47,28 +49,33 @@ class SignUp extends React.Component{
             <h1 >Sign Up</h1>
             <p>Please fill in this form to create an account.</p>
 
-            {/* <Link to="/login"> */}
+            <Link to="/login">
             <button type="button" className="upperBtn" onClick = {this.handleSignIn} >Log In</button>
-            {/* </Link> */}
+            </Link>
 
           </div>
  
           <form className="form"  onSubmit = {this.signUp} >
 
-            <label for="name"><b>Name</b>  </label>
+            <label htmlFor="name"><b>Name</b> 
             <input type='text' value={this.state.name} placeholder="Enter Name" onChange={this.handleChange} name="name" required/>
-
-            <label for="username"><b>Username</b> </label>
+            </label>
+ 
+            <label htmlFor="username"><b>Username</b>
             <input type='text' value={this.state.username} placeholder="Enter Username" onChange={this.handleChange} name="username" required/>
-  
-            <label for="phone"><b>Phone No.</b> </label>
+            </label>
+
+            <label htmlFor="phone"><b>Phone No.</b>
             <input type='number' value={this.state.phone} placeholder="Enter Phone No." onChange={this.handleChange} name="phone" required/>
+            </label>
 
-            <label for="email"><b>Email</b> </label>
+            <label htmlFor="email"><b>Email</b>
             <input type='email' value={this.state.email} placeholder="Enter Email" onChange={this.handleChange} name="email" required/>
+            </label>
 
-            <label for="website"><b>Website</b> </label>
+            <label htmlFor="website"><b>Website</b>
             <input type='text' value={this.state.website} placeholder="Enter Website" onChange={this.handleChange} name="website" required/>
+            </label>
 
             <button type="submit">Sign Up</button>
 
@@ -78,4 +85,4 @@ class SignUp extends React.Component{
     }
 }
 
-export default SignUp;
+export default withRouter(SignUp);
